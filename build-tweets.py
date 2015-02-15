@@ -7,10 +7,11 @@ import datetime, time
 
 
 #########   create UNIX timestamps
-start_date = datetime.datetime(2015,02,01, 17,30,0)
-end_date = datetime.datetime(2015,02,01, 17,15,0)
+start_date = datetime.datetime(2015,02,01, 17,40,0)
+end_date = datetime.datetime(2015,02,01, 18,50,0)
 mintime = int(time.mktime(start_date.timetuple()))
 maxtime = int(time.mktime(end_date.timetuple()))
+
 
 #########	Returns HTTP response of Topsy Search API based on query (hashtag), start time, end time and limit size (max number of tweets)
 def getTopsyResp(queryString, startTime, endTime, limitSize):
@@ -39,10 +40,9 @@ def getTopsyResp(queryString, startTime, endTime, limitSize):
 
 
 
-#########   get response and print out status
-resp = getTopsyResp('#Oscars2015',mintime,maxtime,20)
+#########   get top 5 tweets for Super Bowl during the time slot of interest
+resp = getTopsyResp('#SuperBowl',mintime,maxtime,5)
 print resp.status, resp.reason
-
 
 #########   extract tweets
 resp_content = resp.read()
