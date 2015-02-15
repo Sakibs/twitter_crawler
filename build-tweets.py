@@ -11,6 +11,10 @@ start_date = datetime.datetime(2015,02,01, 17,40,0)
 end_date = datetime.datetime(2015,02,01, 18,50,0)
 mintime = int(time.mktime(start_date.timetuple()))
 maxtime = int(time.mktime(end_date.timetuple()))
+timeInterval = 900 
+
+#########   list of hashtags to search
+queries = ['#SuperBowl','#NFL','#DeflateGate','#DeflatedBalls','#SNL','#Colts']
 
 
 #########	Returns HTTP response of Topsy Search API based on query (hashtag), start time, end time and limit size (max number of tweets)
@@ -53,3 +57,34 @@ tweets = ret['response']['results']['list']
 f = open('top_tweets.txt', 'w')
 f.write(json.dumps(tweets))
 f.close()
+
+#########	get number of tweets for hashtags in multiple time intervals
+f = open('search_log.txt', 'w')
+for query in queries:
+	limitSize = 500
+	curtime = mintime
+	fromTimes = []
+	toTimes = []
+	numResults = []
+	i = 0
+	while (curtime<maxtime):
+		resp = getTopsyResp(query,curtime,maxtime,limitSize)
+		print resp.status, resp.reason
+
+		#########   extract tweets
+		resp_content = resp.read()
+		ret = json.loads(resp_content)
+		tweets = ret['response']['results']['list']
+
+		#########   build search statistic arrays
+		fromTimes.append(mintime)
+		toTimes.append(maxtime)
+		numResults.append(len(tweets))
+		f.write('%r     From:%r     To:%r     No. Of Results:%r\n' % (query, str(fromTimes[i]), str(toTimes[i]), str(numResults[i]) ))
+		
+		#########   update array iterator and time interval
+		i = i+1
+		curtime=curtime+timeInterval
+f.close()
+
+
