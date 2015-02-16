@@ -113,7 +113,7 @@ def twitter_crawler_sakib(hashtag):
 	# start crawling
 	while w_start_time < maxtime:
 		w_end_time = w_start_time+timeInterval
-
+		newTimeInterval = timeInterval
 		# run api query
 		resp = getTopsyResp(hashtag, w_start_time, w_end_time, limitSize)
 		resp_content = resp.read()
@@ -133,19 +133,15 @@ def twitter_crawler_sakib(hashtag):
 			print str(i) + ': Doubling time, got ' + str(ntweets) + ' tweets'
 			# double time interval if number of tweets is diminishing
 			# dont continue, everything is good so far
-
-			# first set new start interval
-			tstart = TStoDT(w_start_time)
-			tend = TStoDT(w_end_time)
-			w_start_time = w_start_time + timeInterval
-			# then update the time interval
-			timeInterval = timeInterval*2
+			
+			# save new time interval for update after writing logs
+			newTimeInterval = timeInterval*2
 		else:
-			print str(i)
-			# update start time
-			tstart = TStoDT(w_start_time)
-			tend = TStoDT(w_end_time)
-			w_start_time = w_start_time + timeInterval
+			print str(i)			
+
+
+		tstart = TStoDT(w_start_time)
+		tend = TStoDT(w_end_time)
 
 		# didnt half time interval and reloop so save current results
 		log.write('%r\t\tFrom:%r\t\tTo:%r\t\tNo. Of Results:%r\n' % (hashtag, tstart, tend, ntweets))
@@ -153,7 +149,13 @@ def twitter_crawler_sakib(hashtag):
 		# store reference logging vars
 		fromTimes.append(tstart)
 		toTimes.append(tend)
+
+		# update variables
+		w_start_time = w_start_time + timeInterval
 		i = i+1
+
+		# update time interval after updating the start time interval
+		timeInterval = newTimeInterval
 
 
 """main function declaration"""
