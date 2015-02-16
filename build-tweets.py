@@ -46,6 +46,7 @@ def getTopsyResp(queryString, startTime, endTime, limitSize):
 	return resp
 
 
+
 """ 
 Write to file helper
 Writes tweets to file line by line
@@ -59,6 +60,8 @@ def write_to_file(filepath, tweetlist):
 	for tweet in tweetlist:
 		f.write(json.dumps(tweet)+'\n')
 	f.close()
+
+
 
 """ 
 Convert int timestamp to readable date time format
@@ -86,42 +89,11 @@ def get_top_tweets(hashtag):
 	filepath = os.path.join('.', 'top_tweets', filename)
 	write_to_file(filepath, top_tweets)
 
+
+
 """
-crawler
+crawler function to crawl for tweets over a time interval
 """
-def tweets_crawler():
-	timeInterval = 900
-
-	#########	get number of tweets for hashtags in multiple time intervals
-	f = open('search_log.txt', 'w')
-	for query in queries:
-		limitSize = 500
-		curtime = mintime
-		fromTimes = []
-		toTimes = []
-		numResults = []
-		i = 0
-		while (curtime<maxtime):
-			resp = getTopsyResp(query,curtime,maxtime,limitSize)
-			print resp.status, resp.reason
-
-			#########   extract tweets
-			resp_content = resp.read()
-			ret = json.loads(resp_content)
-			tweets = ret['response']['results']['list']
-
-			#########   build search statistic arrays
-			fromTimes.append(mintime)
-			toTimes.append(maxtime)
-			numResults.append(len(tweets))
-			f.write('%r\t\tFrom:%r\t\tTo:%r\t\tNo. Of Results:%r\n' % (query, str(fromTimes[i]), str(toTimes[i]), str(numResults[i]) ))
-			
-			#########   update array iterator and time interval
-			i = i+1
-			curtime=curtime+timeInterval
-	f.close()
-
-
 def twitter_crawler_sakib(hashtag):
 	limitSize = 500
 	timeInterval = 100
@@ -164,7 +136,7 @@ def twitter_crawler_sakib(hashtag):
 			timeInterval = timeInterval*2
 		else:
 			print str(i)
-			
+
 		# didnt half time interval and reloop so save current results
 		tstart = TStoDT(w_start_time)
 		tend = TStoDT(w_end_time)
@@ -176,7 +148,8 @@ def twitter_crawler_sakib(hashtag):
 		toTimes.append(tend)
 		i = i+1
 
-# main function declaration
+
+"""main function declaration"""
 if __name__ == "__main__":
 	# time stamp to date time example
 	print TStoDT(1422841200)
