@@ -133,16 +133,23 @@ def twitter_crawler_sakib(hashtag):
 			print str(i) + ': Doubling time, got ' + str(ntweets) + ' tweets'
 			# double time interval if number of tweets is diminishing
 			# dont continue, everything is good so far
+
+			# first set new start interval
+			tstart = TStoDT(w_start_time)
+			tend = TStoDT(w_end_time)
+			w_start_time = w_start_time + timeInterval
+			# then update the time interval
 			timeInterval = timeInterval*2
 		else:
 			print str(i)
+			# update start time
+			tstart = TStoDT(w_start_time)
+			tend = TStoDT(w_end_time)
+			w_start_time = w_start_time + timeInterval
 
 		# didnt half time interval and reloop so save current results
-		tstart = TStoDT(w_start_time)
-		tend = TStoDT(w_end_time)
 		log.write('%r\t\tFrom:%r\t\tTo:%r\t\tNo. Of Results:%r\n' % (hashtag, tstart, tend, ntweets))
 		
-		w_start_time = w_start_time + timeInterval
 		# store reference logging vars
 		fromTimes.append(tstart)
 		toTimes.append(tend)
