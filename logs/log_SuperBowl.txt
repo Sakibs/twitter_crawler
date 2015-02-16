@@ -1,0 +1,16 @@
+'#SuperBowl'		From:'2015-02-01 17:40:00'		To:'2015-02-01 17:40:12'		No. Of Results:433
+'#SuperBowl'		From:'2015-02-01 17:40:12'		To:'2015-02-01 17:40:24'		No. Of Results:368
+'#SuperBowl'		From:'2015-02-01 17:40:24'		To:'2015-02-01 17:40:36'		No. Of Results:333
+'#SuperBowl'		From:'2015-02-01 17:40:36'		To:'2015-02-01 17:40:48'		No. Of Results:392
+'#SuperBowl'		From:'2015-02-01 17:40:48'		To:'2015-02-01 17:41:00'		No. Of Results:350
+'#SuperBowl'		From:'2015-02-01 17:41:00'		To:'2015-02-01 17:41:12'		No. Of Results:325
+'#SuperBowl'		From:'2015-02-01 17:41:12'		To:'2015-02-01 17:41:24'		No. Of Results:296
+'#SuperBowl'		From:'2015-02-01 17:41:24'		To:'2015-02-01 17:41:36'		No. Of Results:306
+'#SuperBowl'		From:'2015-02-01 17:41:36'		To:'2015-02-01 17:41:48'		No. Of Results:296
+'#SuperBowl'		From:'2015-02-01 17:41:48'		To:'2015-02-01 17:42:00'		No. Of Results:382
+'#SuperBowl'		From:'2015-02-01 17:42:00'		To:'2015-02-01 17:42:12'		No. Of Results:309
+'#SuperBowl'		From:'2015-02-01 17:42:12'		To:'2015-02-01 17:42:24'		No. Of Results:351
+'#SuperBowl'		From:'2015-02-01 17:42:24'		To:'2015-02-01 17:42:36'		No. Of Results:336
+'#SuperBowl'		From:'2015-02-01 17:42:36'		To:'2015-02-01 17:42:48'		No. Of Results:308
+'#SuperBowl'		From:'2015-02-01 17:42:48'		To:'2015-02-01 17:43:00'		No. Of Results:360
+'#SuperBowl'		From:'2015-02-01 17:43:00'		To:'2015-02-01 17:43:12'		No. Of Results:354
