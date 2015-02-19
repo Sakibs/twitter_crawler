@@ -62,6 +62,18 @@ def write_to_file(filepath, tweetlist):
 	f.close()
 
 
+""" 
+Write to file helper
+Appends tweets to file line by line
+"""
+def append_to_file(filepath, tweetlist):
+	# write to file line by line
+	f = open(filepath, 'a+')
+	for tweet in tweetlist:
+		f.write(json.dumps(tweet)+'\n')
+	f.close()
+
+
 
 """ 
 Convert int timestamp to readable date time format
@@ -94,25 +106,29 @@ def get_top_tweets(hashtag):
 """
 crawler function to crawl for tweets over a time interval
 """
-def twitter_crawler_sakib(hashtag):
+def twitter_crawler(hashtag, mintime, maxtime, timeInterval):
 	limitSize = 500
-	timeInterval = 100
 	w_start_time = mintime
 
-	# self reference logging
-	fromTimes = []
-	toTimes = []
-	numResults = []
 	i = 0 # keep track of number of iterations saved
-
 	logname = 'log'+'_'+hashtag[1:]+'.txt'
+	log2name = 'log2'+'_'+hashtag[1:]+'.txt'
 	logpath = os.path.join('.', 'logs', logname)
+	log2path = os.path.join('.', 'logs', log2name)
+	filename = 'tweets'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweets', filename)
 	# start writing log, use a+ if appending data
 	log = open(logpath, 'w')
+	log2 = open(log2path, 'w')
+	# clear tweet file original contents
+	with open(filepath, 'w'):
+		pass
 
 	# start crawling
 	while w_start_time < maxtime:
 		w_end_time = w_start_time+timeInterval
+		if(w_end_time>maxtime):
+			w_end_time=maxtime
 		newTimeInterval = timeInterval
 		# run api query
 		resp = getTopsyResp(hashtag, w_start_time, w_end_time, limitSize)
@@ -143,12 +159,12 @@ def twitter_crawler_sakib(hashtag):
 		tstart = TStoDT(w_start_time)
 		tend = TStoDT(w_end_time)
 
+		# write tweets to file by appending
+		append_to_file(filepath, tweets)
+
 		# didnt half time interval and reloop so save current results
-		log.write('%r\t\tFrom:%r\t\tTo:%r\t\tNo. Of Results:%r\n' % (hashtag, tstart, tend, ntweets))
-		
-		# store reference logging vars
-		fromTimes.append(tstart)
-		toTimes.append(tend)
+		log.write('%r\tFrom:%r\tTo:%r\tNo. Of Results:%r\n' % (hashtag, tstart, tend, ntweets))
+		log2.write('%r\tFrom:%r\tTo:%r\tTimeInterval:%r\tNo. Of Results:%r\n' % (hashtag, str(w_start_time), str(w_end_time), str(timeInterval), ntweets))
 
 		# update variables
 		w_start_time = w_start_time + timeInterval
@@ -161,11 +177,12 @@ def twitter_crawler_sakib(hashtag):
 """main function declaration"""
 if __name__ == "__main__":
 	# time stamp to date time example
-	print TStoDT(1422841200)
-	print TStoDT(1422845400)
+	#print TStoDT(1422841200)
+	#print TStoDT(1422845400)
 
 	# part 1
 	# get_top_tweets('#SuperBowl')
 
 	# part 2
-	print twitter_crawler_sakib('#SuperBowl')
+	timeInterval = 100
+	print twitter_crawler('#SuperBowl',mintime,maxtime,timeInterval)

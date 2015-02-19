@@ -4,7 +4,7 @@
 *.asv
 *.ipynb
 .ipynb_checkpoints/
-
+.tweets/
 
 #################
 ## Eclipse
