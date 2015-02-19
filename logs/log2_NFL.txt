@@ -4,7 +4,7 @@
 '#NFL'	From:'1422841500'	To:'1422841600'	TimeInterval:'100'	No. Of Results:109
 '#NFL'	From:'1422841600'	To:'1422841700'	TimeInterval:'100'	No. Of Results:121
 '#NFL'	From:'1422841700'	To:'1422841800'	TimeInterval:'100'	No. Of Results:172
-'#NFL'	From:'1422841800'	To:'1422841900'	TimeInterval:'100'	No. Of Results:134
+'#NFL'	From:'1422841800'	To:'1422841900'	TimeInterval:'100'	No. Of Results:133
 '#NFL'	From:'1422841900'	To:'1422842000'	TimeInterval:'100'	No. Of Results:171
 '#NFL'	From:'1422842000'	To:'1422842100'	TimeInterval:'100'	No. Of Results:254
 '#NFL'	From:'1422842100'	To:'1422842200'	TimeInterval:'100'	No. Of Results:292
@@ -20,7 +20,7 @@
 '#NFL'	From:'1422843100'	To:'1422843200'	TimeInterval:'100'	No. Of Results:219
 '#NFL'	From:'1422843200'	To:'1422843300'	TimeInterval:'100'	No. Of Results:154
 '#NFL'	From:'1422843300'	To:'1422843400'	TimeInterval:'100'	No. Of Results:185
-'#NFL'	From:'1422843400'	To:'1422843500'	TimeInterval:'100'	No. Of Results:123
+'#NFL'	From:'1422843400'	To:'1422843500'	TimeInterval:'100'	No. Of Results:122
 '#NFL'	From:'1422843500'	To:'1422843600'	TimeInterval:'100'	No. Of Results:115
 '#NFL'	From:'1422843600'	To:'1422843700'	TimeInterval:'100'	No. Of Results:144
 '#NFL'	From:'1422843700'	To:'1422843800'	TimeInterval:'100'	No. Of Results:137
@@ -31,7 +31,7 @@
 '#NFL'	From:'1422844200'	To:'1422844300'	TimeInterval:'100'	No. Of Results:301
 '#NFL'	From:'1422844300'	To:'1422844400'	TimeInterval:'100'	No. Of Results:143
 '#NFL'	From:'1422844400'	To:'1422844500'	TimeInterval:'100'	No. Of Results:128
-'#NFL'	From:'1422844500'	To:'1422844600'	TimeInterval:'100'	No. Of Results:137
+'#NFL'	From:'1422844500'	To:'1422844600'	TimeInterval:'100'	No. Of Results:136
 '#NFL'	From:'1422844600'	To:'1422844700'	TimeInterval:'100'	No. Of Results:124
 '#NFL'	From:'1422844700'	To:'1422844800'	TimeInterval:'100'	No. Of Results:120
 '#NFL'	From:'1422844800'	To:'1422844900'	TimeInterval:'100'	No. Of Results:115

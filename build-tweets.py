@@ -1,9 +1,7 @@
 import os
-import pprint
 import json
 import urllib
 import httplib
-import json
 import datetime, time
 
 
@@ -174,6 +172,91 @@ def twitter_crawler(hashtag, mintime, maxtime, timeInterval):
 		timeInterval = newTimeInterval
 
 
+""" 
+Find unique tweets. This function is intended for number 4, this is a work in progress
+"""
+def unique_tweets(hashtag):
+	filename = 'tweets'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweets', filename)
+	print filepath
+	f = open(filepath, 'r')
+
+	tweets_list = []
+	conflicts_list = []
+	for line in f:
+		tweet = json.loads(line)
+
+		title = tweet['title']
+		retweet_count = tweet['tweet']['retweet_count']
+		retweeted = tweet['tweet']['retweeted']
+		# check if tweet is already stored in list
+		res = filter(lambda twt: twt['title'] == title, tweets_list)
+		# if not stored, store it
+		if len(res) < 1:
+			new_item = {
+				'title': title, 
+				'retweet_count': retweet_count, 
+				'retweeted': retweeted,
+				'count' : 0
+			}
+			tweets_list.append(new_item)
+		# if we found a duplicate tweet store it in conflicts for analysis for now
+		else:
+			# print "GOT CONFLICT: " + str(len(res))
+			# print '\t'+str(retweet_count)+':::'+title.encode('utf8')+'\n'
+			item = res[0]
+			item['count'] = item['count']+1
+
+			conflict_item = {
+				'title': title,
+				'retweet_count': retweet_count, 
+				'retweeted': retweeted
+			}
+			conflicts_list.append(conflict_item)
+
+
+	f.close()
+
+	all_items = json.dumps(tweets_list)
+
+	#### print stuff to debug how retweets are handled
+	filename = 'debug'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweet_counts', filename)
+	f = open(filepath, 'w')
+	f.write(all_items)
+	f.close()
+
+	all_items = json.dumps(conflicts_list)
+	filename = 'conflict'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweet_counts', filename)
+	f = open(filepath, 'w')
+	f.write(all_items)
+	f.close()
+	##########
+
+	# sum up tweets that were retweet k times
+	k_count = []
+	for item in tweets_list:
+		retweet_count = item['retweet_count']
+		res = filter(lambda ct: ct['k'] == retweet_count, k_count)
+		if len(res) < 1:
+			entry = {
+				'k' : retweet_count,
+				'count' : 1
+			}
+			k_count.append(entry)
+		else:
+			entry = res[0]
+			entry['count'] = entry['count'] + 1
+
+	all_items = json.dumps(k_count)
+	filename = 'tweet_counts'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweet_counts', filename)
+	f = open(filepath, 'w')
+	f.write(all_items)
+	f.close()
+
+
 """main function declaration"""
 if __name__ == "__main__":
 	# time stamp to date time example
@@ -184,5 +267,7 @@ if __name__ == "__main__":
 	# get_top_tweets('#SuperBowl')
 
 	# part 2
-	timeInterval = 100
-	print twitter_crawler('#SuperBowl',mintime,maxtime,timeInterval)
+	#timeInterval = 100
+	#print twitter_crawler('#NFL',mintime,maxtime,timeInterval)
+
+	unique_tweets('#NFL')
