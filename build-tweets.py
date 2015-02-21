@@ -187,7 +187,7 @@ def unique_tweets(hashtag):
 		tweet = json.loads(line)
 
 		title = tweet['title']
-		retweet_count = tweet['tweet']['retweet_count']
+		retweet_count = tweet['metrics']['citations']['total']
 		retweeted = tweet['tweet']['retweeted']
 		# check if tweet is already stored in list
 		res = filter(lambda twt: twt['title'] == title, tweets_list)
@@ -202,10 +202,14 @@ def unique_tweets(hashtag):
 			tweets_list.append(new_item)
 		# if we found a duplicate tweet store it in conflicts for analysis for now
 		else:
-			# print "GOT CONFLICT: " + str(len(res))
-			# print '\t'+str(retweet_count)+':::'+title.encode('utf8')+'\n'
+			print "GOT CONFLICT: "
+			print '\t'+str(retweet_count)+':::'+str(res[0]['retweet_count'])+'\n'
 			item = res[0]
 			item['count'] = item['count']+1
+			# keep the higher retweet count
+			if(retweet_count > item['retweet_count']):
+				item['retweet_count'] = retweet_count
+				print "RESETTING retweet count to greater value"
 
 			conflict_item = {
 				'title': title,
@@ -256,6 +260,21 @@ def unique_tweets(hashtag):
 	f.write(all_items)
 	f.close()
 
+def parse_tweets(hashtag, nlines=-1):
+	filename = 'tweets'+'_'+hashtag[1:]+'.txt'
+	filepath = os.path.join('.', 'tweets', filename)
+	f = open(filepath, 'r')
+
+	for line in f:
+		tweet = json.loads(line)
+
+		text = tweet['tweet']['text']
+		retweet_count = tweet['metrics']['citations']['total']
+		post_date = tweet['firstpost_date']
+		user_name = tweet['tweet']['user']['name']
+
+		print user_name.encode('utf8') + '\t' + str(post_date) + '\t' + str(retweet_count) + '\t' + text.encode('utf8')
+
 
 """main function declaration"""
 if __name__ == "__main__":
@@ -268,6 +287,10 @@ if __name__ == "__main__":
 
 	# part 2
 	#timeInterval = 100
-	#print twitter_crawler('#NFL',mintime,maxtime,timeInterval)
+	#twitter_crawler('#DeflatedBalls',mintime,maxtime,timeInterval)
+	
+	# part 4
+	# unique_tweets('#NFL')
 
-	unique_tweets('#NFL')
+	# part 6
+	# parse_tweets('#Colts')

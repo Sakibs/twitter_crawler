@@ -1,6 +1,6 @@
 '#Colts'	From:'1422841200'	To:'1422841300'	TimeInterval:'100'	No. Of Results:3
 '#Colts'	From:'1422841300'	To:'1422841500'	TimeInterval:'200'	No. Of Results:4
-'#Colts'	From:'1422841500'	To:'1422841900'	TimeInterval:'400'	No. Of Results:8
-'#Colts'	From:'1422841900'	To:'1422842700'	TimeInterval:'800'	No. Of Results:15
+'#Colts'	From:'1422841500'	To:'1422841900'	TimeInterval:'400'	No. Of Results:7
+'#Colts'	From:'1422841900'	To:'1422842700'	TimeInterval:'800'	No. Of Results:14
 '#Colts'	From:'1422842700'	To:'1422844300'	TimeInterval:'1600'	No. Of Results:49
 '#Colts'	From:'1422844300'	To:'1422845400'	TimeInterval:'3200'	No. Of Results:19
