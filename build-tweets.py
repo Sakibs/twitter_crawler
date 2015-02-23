@@ -271,6 +271,7 @@ def parse_tweets(hashtag, nlines=-1):
 		text = tweet['tweet']['text']
 		retweet_count = tweet['metrics']['citations']['total']
 		post_date = tweet['firstpost_date']
+		post_date = TStoDT(post_date)
 		user_name = tweet['tweet']['user']['name']
 
 		print user_name.encode('utf8') + '\t' + str(post_date) + '\t' + str(retweet_count) + '\t' + text.encode('utf8')
@@ -286,11 +287,11 @@ if __name__ == "__main__":
 	# get_top_tweets('#SuperBowl')
 
 	# part 2
-	#timeInterval = 100
-	#twitter_crawler('#DeflatedBalls',mintime,maxtime,timeInterval)
+	# timeInterval = 100
+	# twitter_crawler('#DeflatedBalls',mintime,maxtime,timeInterval)
 	
 	# part 4
-	# unique_tweets('#NFL')
+	# unique_tweets('#Colts')
 
 	# part 6
-	# parse_tweets('#Colts')
+	parse_tweets('#Colts')
